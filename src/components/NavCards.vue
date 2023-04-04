@@ -7,8 +7,10 @@
         :style="`background-color: ${card.color}; z-index: ${index + 1};`"
         @click="select(index, card.url)"
         >
-        <img :src="card.icon" v-if="card.icon" alt=""/>
-        <div>{{ card.title }}</div>
+        <div class="card-content">
+          <img :src="card.icon" v-if="card.icon" alt=""/>
+          <div>{{ card.title }}</div>
+        </div>
         <!-- src="@/assets/projects.svg" -->
       </button>
       
@@ -91,15 +93,14 @@ export default {
 }
 
 nav {
-  position: absolute;
-  width: inherit;
-  height: inherit;
-
   position: relative;
+
   display: flex;
   flex-direction: row;
+
   justify-content: center;
   align-items: center;
+
   width: inherit;
   height: inherit;
 
@@ -139,17 +140,28 @@ nav {
   }
 
   button {
-    color: white;
-    font-size: 2vmax;
-    font-weight: 700;
-    text-overflow: clip;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    padding: 1vmax;
+    color: white;
+    font-size: clamp(13pt, 2vw, 23pt);
+    font-weight: 700;
+
+    padding: clamp(5px, 1vmax, 40px);
 
     cursor: pointer;
 
-    div {
-      overflow: hidden;
+    .card-content {
+      max-width: 19vmax;
+      max-height: 19vmax;
+      aspect-ratio: 1 / 1.5;
+
+      img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+      }
     }
   }
 }
