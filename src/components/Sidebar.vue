@@ -49,6 +49,7 @@ aside {
   rotate: 0deg;
 
   translate: 102vw;
+  translate: 102dvw; //Override with device width if supported
   opacity: 0;
 
   width: 53.33vh;
@@ -63,13 +64,22 @@ aside {
   cursor: pointer;
 }
 
-aside.pulsate::before {
+aside::before {
   content: '';
   position: relative;
   display: block;
 
-  background-color: white;
-  animation: pulsate .5s infinite;
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+
+  border: 5px solid white;
+  border-radius: inherit;
+}
+
+aside.pulsate::before {
+  animation: pulsate 1.5s infinite 1s;
 }
 
 aside:not(.activated):hover {
@@ -106,7 +116,16 @@ aside.activated + main {
 }
 
 @keyframes pulsate {
-
+  65% {
+    opacity: 1;
+  }
+  80% {
+    transform: translateX(-20px) translateY(-20px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-20px) translateY(-20px);
+  }
 }
 
 @keyframes closing-sidebar {
