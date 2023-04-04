@@ -128,8 +128,9 @@ nav {
     aspect-ratio: 1 / 1.5;
     
     border-radius: 2vmax;
-    box-shadow: 0 0 0 6px white;
     border: none;
+
+    box-shadow: 0 0 0 6px white;
     background-color: rgb(33, 33, 33);
 
     --deal-speed: 350ms;
@@ -146,8 +147,9 @@ nav {
     align-items: center;
 
     color: white;
-    font-size: clamp(13pt, 2vw, 23pt);
+    
     font-weight: 700;
+    font-size: clamp(13pt, 2vw, 23pt);
 
     padding: clamp(5px, 1vmax, 40px);
 
@@ -205,7 +207,8 @@ nav {
           to {
             opacity: 1;
             transform: 
-              translateX(calculateXOffset($x, $a) - 1vw) translateY(calculateY($x, $a) / 2 * 1px);
+              translateX(calculateXOffset($x, $a) - 1vw)
+              translateY(calculateY($x, $a) / 2 * 1px);
             rotate: rotation($x, $a);
           }
         }
@@ -226,7 +229,8 @@ nav {
           to {
             opacity: 1;
             transform: 
-              translateX(calculateXOffset($x, $a) + 1vw) translateY(calculateY($x, $a) / 2 * 1px);
+              translateX(calculateXOffset($x, $a) + 1vw)
+              translateY(calculateY($x, $a) / 2 * 1px);
             rotate: rotation($x, $a);
           }
         }
