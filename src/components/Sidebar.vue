@@ -1,5 +1,10 @@
 <template>
-  <aside :class="[activated ? 'activated' : '', pulsate ? 'pulsate' : '']" @click="activate">
+  <aside 
+    :class="[
+      activated ? 'activated' : '', 
+      pulsate && !activated ? 'pulsate' : ''
+      ]"
+      @click="activate">
   </aside>
 </template>
 
@@ -16,7 +21,7 @@ export default {
   },
   mounted() {
     if (!this.$store.state.previouslyActivated) {
-      setTimeout(() => {if (!this.activated) this.pulsate = true}, 1000 * 2);
+      setTimeout(() => { this.pulsate = true }, 1000 * 2); //Keep delay consistent with animation time
     }
   },
   methods: {
@@ -53,7 +58,7 @@ aside {
   background-color: rgb(225, 199, 0);
   
   transition: rotate 250ms, scale 250ms, translate 200ms linear;
-  animation: enter-sidebar 1s forwards 500ms;
+  animation: enter-sidebar 1s forwards 500ms; //Update delay for pulsate class when changed
 
   cursor: pointer;
 }
@@ -85,7 +90,7 @@ aside:not(.activated):hover {
   }
 }
 
-@media (orientation: portrair) and (max-width: 700px) {
+@media (orientation: portrait) and (max-width: 700px) {
   aside {
     translate: 110vw;
   }
