@@ -53,6 +53,7 @@ aside {
   opacity: 0;
 
   width: 53.33vh;
+  width: 53.33dvh; //Override with device height if supported
   aspect-ratio: 1 / 1.5;
 
   border-radius: 2vmax;

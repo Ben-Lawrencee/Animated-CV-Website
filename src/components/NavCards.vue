@@ -7,6 +7,9 @@
         :style="`background-color: ${card.color}; z-index: ${index + 1};`"
         @click="select(index, card.url)"
         >
+        <img :src="card.icon" v-if="card.icon" alt=""/>
+        <div>{{ card.title }}</div>
+        <!-- src="@/assets/projects.svg" -->
       </button>
       
       <div 
@@ -106,7 +109,8 @@ nav {
 
   z-index: 0;
 
-  div, button {
+  & > div,
+  & > button {
     position: absolute;
 
     flex-grow: 1;
@@ -116,7 +120,10 @@ nav {
     rotate: 0deg;
 
     min-height: 20vh;
+    min-height: 20dvh; //Override with device height
+
     min-width: 20vw;
+    min-width: 20dvw; //Override with device width
     aspect-ratio: 1 / 1.5;
     
     border-radius: 2vmax;
@@ -132,10 +139,22 @@ nav {
   }
 
   button {
-    cursor: pointer;
-  }
+    color: white;
+    font-size: 2vmax;
+    font-weight: 700;
+    text-overflow: clip;
 
-  @mixin setupCards($amountOfCards) {
+    padding: 1vmax;
+
+    cursor: pointer;
+
+    div {
+      overflow: hidden;
+    }
+  }
+}
+
+@mixin setupCards($amountOfCards) {
     $j: math.round(-($amountOfCards / 2) - 1);
     $a: 10;
     $x: 0;
@@ -151,7 +170,7 @@ nav {
       }
 
 
-      #{'button:nth-of-type('$i')'} {
+      #{'nav > button:nth-of-type('$i')'} {
         animation: 
           deal-card-#{$i} 
           var(--deal-speed) 
@@ -160,7 +179,7 @@ nav {
       }
 
       @if ($x < 0) {
-        #{'div:nth-of-type('$i')'} {
+        #{'nav > div:nth-of-type('$i')'} {
           transform: 
             translateX(calculateXOffset($x, $a) - 1vw)
             translateY(calculateY($x, $a) / 2 * 1px);
@@ -181,7 +200,7 @@ nav {
       }
 
       @else {
-        #{'div:nth-of-type('$i')'} {
+        #{'nav > div:nth-of-type('$i')'} {
           transform: 
             translateX(calculateXOffset($x, $a) + 1vw)
             translateY(calculateY($x, $a) / 2 * 1px);
@@ -204,7 +223,6 @@ nav {
   }
 
   @include setupCards(5);
-}
 
 // If nav does not have a button.selected then button:hover gets styled
 nav:not(:has(.selected)) button:is(:hover, :focus) {
