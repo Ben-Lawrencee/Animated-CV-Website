@@ -1,4 +1,4 @@
-# slider-cv-website
+# My Animated CV Website
 
 ## Project setup
 ```
